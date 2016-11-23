@@ -24,7 +24,6 @@
         this.keyName = 'data-key';
         this.valueName = 'data-value';
         this.scan();
-        return this;
     };
 
     /**
@@ -62,7 +61,7 @@
      * @param callback
      * @param useCapture
      */
-    clicker.prototype.click = function (key,  callback, useCapture) {
+    clicker.prototype.click = function (key, callback, useCapture) {
         var valueName = this.valueName;
         var specialCallback = function (event) {callback.call(event, event.target, event.target.getAttribute(valueName))};
         this.on('click', key,  specialCallback, useCapture);
@@ -92,6 +91,7 @@
         elem.key = key;
         this.list.push(elem);
     };
+
 
     window.Clicker = clicker;
     window.Clicker.version = '0.0.1'

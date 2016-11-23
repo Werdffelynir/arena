@@ -1,6 +1,13 @@
 (function () {
 
+    /**
+     *
+     */
 
+    /**
+     *
+     * @type {string}
+     */
     var version = '0.1.2';
 
 
@@ -578,8 +585,7 @@
          * Startup type of constructor for modules
          * Type: false - off constructor
          *      'runtime' - perform during the assignment of namespace
-         *      'gather' - save in the stack,
-         *          for call and execute all constructor methods, use .constructsStart()
+         *      'gather' - save in the stack, for call and execute all constructor methods, use .constructsStart()
          */
         constructsType: 'runtime',
 
