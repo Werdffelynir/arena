@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/grid.css">
+
+<!--    <script src="/js/lib/ns.application.js"></script>
+    <script src="/js/app/init.js"></script>-->
+
+    <script src="/js/lib/animate.js"></script>
+    <script src="/js/lib/clicker.js"></script>
+    <script src="/js/lib/timer.js"></script>
+
+    <style>
+        html,body{
+            font-family: "Ubuntu Condensed", "Ubuntu", "sans", "sans-serif";
+            font-size: 100%;
+        }
+        #page {
+            margin: 20px auto;
+            width: 800px;
+        }
+        .flex{
+            display: flex;
+            justify-content: space-around;
+        }
+
+
+    </style>
+</head>
+<body>
+
+<div id="page" class="flex">
+    <div>
+        <div class="flex">
+            <div class="life-box">
+                <div class="life-line hero"><div class="life-point">100</div>&nbsp;</div>
+            </div>
+            <span>&nbsp;</span>
+            <div class="life-box">
+                <div class="life-line enemy"><div class="life-point">100</div>&nbsp;</div>
+            </div>
+        </div>
+        <div id="canvases">
+            <canvas id="layer1"></canvas>
+        </div>
+        <div id="fight-log"></div>
+    </div>
+    <div>
+        <div class="flex">
+            <ul class="act-btns">
+                <li>Attack</li>
+                <li class="act-btn clicker" data-key="attack" data-value="head">head</li>
+                <li class="act-btn clicker" data-key="attack" data-value="body">body</li>
+                <li class="act-btn clicker" data-key="attack" data-value="lags">lags</li>
+            </ul>
+            <ul class="act-btns">
+                <li>Defence</li>
+                <li class="act-btn clicker" data-key="defence" data-value="head">head</li>
+                <li class="act-btn clicker" data-key="defence" data-value="body">body</li>
+                <li class="act-btn clicker" data-key="defence" data-value="lags">lags</li>
+            </ul>
+        </div>
+        <div class="act-btn-fight clicker" data-key="fight">Fight</div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+    var clicker = Clicker();
+
+    var Game = function (name, elements) {
+        if (!(this instanceof Game)) return new Game(name);
+        this.name = name;
+        this.elements = elements;
+        this.units = {};
+    };
+    Game.prototype.name = 'game';
+    Game.prototype.addUnit = function (name, unit) {
+        this.units[name] = unit;
+    };
+
+
+    var an = Animate({
+        selector: '#layer1',
+        width: 600,
+        height: 400,
+        fps: 0,
+        loop: Animate.LOOP_ANIMATE,
+        autoClear: true,
+        sorting: true,
+        filtering: true
+    });
+
+    an.frame(function (ctx, frameCount) {
+        console.log('frame', frameCount);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(0,0,200,100);
+        an.start('main');
+    });
+
+    an.frame('main', function (ctx, frameCount) {
+        console.log('main', frameCount);
+        ctx.fillStyle = 'red';
+        ctx.fillRect(100,100,200,100);
+    });
+
+    an.start();
+
+    var tm = new Timer(1000, 5);
+    tm.addEventListener(Timer.START, function (n) {
+        console.log('START', n);
+    });
+    tm.addEventListener(Timer.PROGRESS, function (n) {
+        console.log('PROGRESS', n);
+    });
+    tm.addEventListener(Timer.COMPLETE, function (n) {
+        console.log('COMPLETE', n);
+    });
+    //tm.start();
+
+
+
+/*
+    var timeData = {name: 'timeData', i: 0};
+
+    var timerId = Timer.interval(function () {
+        console.log(this === timeData, this.name, this.i);
+        this.i ++;
+        if (this.i == 5)
+            Timer.intervalStop(timerId);
+
+    }, 1000, timeData);
+
+*/
+
+
+
+</script>
+</body>
+</html>

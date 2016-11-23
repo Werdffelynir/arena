@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/grid.css">
+
+    <script src="/js/lib/an.core.loop.js"></script>
+    <script src="/js/lib/clicker.js"></script>
+
+    <style>
+        html,body{
+            font-family: "Ubuntu Condensed", "Ubuntu", "sans", "sans-serif";
+            font-size: 100%;
+        }
+        #page {
+            margin: 20px auto;
+            width: 800px;
+        }
+        .flex{
+            display: flex;
+            justify-content: space-around;
+        }
+        .life-box{
+            border: 4px solid #000;
+            background-color: burlywood;
+            width: 200px;
+        }
+        .life-line{
+            background-color: #de0009;
+            width: 100%;
+        }
+        .act-btn{
+            padding: 5px 5px;
+            width: 180px;
+            text-align: center;
+            border: 2px solid #000;
+            background-color: #c4de54;
+        }
+        .act-btns{
+        }
+        .act-btns>li:first-child{
+            text-align: center;
+            font-weight: bold;
+            font-size: 110%;
+        }
+        .act-btn-fight{
+            margin-top: 20px;
+            padding: 5px 5px;
+            text-align: center;
+            border: 2px solid #000;
+            background-color: #ff6900;
+        }
+        #act-fight-log{
+            padding: 5px 5px;
+            border: 2px solid #ff6900;
+            background-color: #000;
+            color: #ff6900;
+        }
+        #fight-log{
+            margin-top: 20px;
+            padding: 5px;
+            background-color: #000;
+            color: #fff;
+        }
+        .fight-log-line{
+            font-size: 11px;
+            font-family: "sans", "sans-serif";
+        }
+        .life-point{position: absolute}
+    </style>
+</head>
+<body>
+
+<div id="page" class="flex">
+    <div>
+        <div class="flex">
+            <div class="life-box">
+                <div class="life-line hero"><div class="life-point">100</div>&nbsp;</div>
+            </div>
+            <span>&nbsp;</span>
+            <div class="life-box">
+                <div class="life-line enemy"><div class="life-point">100</div>&nbsp;</div>
+            </div>
+        </div>
+        <div id="fight-log"></div>
+    </div>
+    <div>
+        <div class="flex">
+            <ul class="act-btns">
+                <li>Attack</li>
+                <li class="act-btn clicker" data-key="attack" data-value="head">head</li>
+                <li class="act-btn clicker" data-key="attack" data-value="body">body</li>
+                <li class="act-btn clicker" data-key="attack" data-value="lags">lags</li>
+            </ul>
+            <ul class="act-btns">
+                <li>Defence</li>
+                <li class="act-btn clicker" data-key="defence" data-value="head">head</li>
+                <li class="act-btn clicker" data-key="defence" data-value="body">body</li>
+                <li class="act-btn clicker" data-key="defence" data-value="lags">lags</li>
+            </ul>
+        </div>
+        <div class="act-btn-fight clicker" data-key="fight">Fight</div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+<script>
+
+    var c = Clicker();
+
+    var Game = function (name, elements) {
+        if (!(this instanceof Game)) return new Game(name);
+        this.name = name;
+        this.elements = elements;
+        this.units = {};
+    };
+    Game.prototype.name = 'game';
+    Game.prototype.addUnit = function (name, unit) {
+        this.units[name] = unit;
+    };
+    Game.prototype.getUnit = function (name) {
+        return this.units[name] ? this.units[name] : null;
+    };
+    Game.random = function (min, max) {
+        return Math.floor(Math.random()*(max-min+1)+min);
+    };
+    Game.prototype.addFightlog = function (text) {
+        var line = document.createElement('p');
+        line.className = 'fight-log-line';
+        line.innerHTML = text;
+        this.elements['fightlog'].appendChild(line);
+    };
+    Game.prototype.resetFightlog = function () {
+        this.elements['fightlog'].textContent = '';
+    };
+    Game.prototype.fight = function (unit1, unit2) {
+        var u1 = this.getUnit(unit1);
+        var u2 = this.getUnit(unit2);
+
+        //auto set fightAppoint
+        var positions = ['head','body','lags'];
+        u2.fightAppoint['attack'] = positions[Game.random(0,2)];
+        u2.fightAppoint['defence'] = positions[Game.random(0,2)];
+
+        var damage = 0;
+        var logHtml = '';
+
+        // U1 attack
+        if (u1.fightAppoint['attack'] !== u2.fightAppoint['defence']) {
+            damage = Game.random(7, 13);
+            u2.setLife(u2.statuses.life - damage);
+            logHtml += '<span style="color: #ffca1e">Герой наносит врагу <b>'+damage+'</b> урона</span>';
+        }else{
+            logHtml += '<span style="color: #ffffff">Враг <b>блокирует</b> атаку от героя</span>';
+        }
+
+        // U2 attack
+        if (u2.fightAppoint['attack'] !== u1.fightAppoint['defence']) {
+            damage = Game.random(7, 13);
+            u1.setLife(u1.statuses.life - damage);
+            logHtml += '<span style="color: #ff0f00; float: inline-end;">Враг наносит герою <b>'+damage+'</b> урона</span>';
+        }else{
+            logHtml += '<span style="color: #ffffff; float: inline-end;">Герой <b>блокирует</b> атаку от врага</span>';
+        }
+
+        // Unit dead
+        if (u1.statuses.life < 1) {
+            logHtml = '<span style="color: #ffffff">Герой был <b>убит</b>!</span>';
+            u1.setLife(0);
+        }
+        if (u2.statuses.life < 1) {
+            logHtml = '<span style="color: #ffffff">Враг был <b>убит</b>!</span>';
+            u2.setLife(0);
+        }
+        if (u1.statuses.life < 1 && u2.statuses.life < 1) {
+            logHtml = '<span style="color: #ffffff"><b>Среди мёртвых воины пали</b>!</span>';
+        }
+        this.addFightlog(logHtml);
+    };
+
+    var Unit = function (name, elements) {
+        if (!(this instanceof Unit)) return new Unit(name);
+        this.name = name;
+        this.elements = elements;
+        this.statuses = {life: 100, power: 10, hit: 3, critical: 3};
+        this.fightAppoint = this.fightAppointReset();
+    };
+    Unit.prototype.name = 'unit';
+    Unit.prototype.setLife = function (life) {
+        this.statuses.life = life;
+        this.elements['lifeline'].style.width = life + '%';
+        this.elements['lifepoint'].innerHTML = life + '%';
+    };
+    Unit.prototype.fightAppointReset = function () {
+        this.fightAppoint = {attack: null, defence: null};
+        return this.fightAppoint;
+    };
+
+
+    var Gm = new Game('arena', {
+        fightlog: document.querySelector('#fight-log')
+    });
+    var Hero = new Unit('Hero', {
+        lifeline: document.querySelector('.hero'),
+        lifepoint: document.querySelector('.hero>.life-point')
+    });
+    var Enemy = new Unit('Enemy', {
+        lifeline: document.querySelector('.enemy'),
+        lifepoint: document.querySelector('.enemy>.life-point')
+    });
+
+    Gm.addUnit('Hero', Hero);
+    Gm.addUnit('Enemy', Enemy);
+
+
+
+
+
+
+
+    c.click('attack', function (elem, value) {
+        Hero.fightAppoint['attack'] = value;
+        c.get('attack').map(function(elem){elem.style.backgroundColor = '#c4de54';});
+        elem.style.backgroundColor = '#7c921c';
+    });
+    c.click('defence', function (elem, value) {
+        Hero.fightAppoint['defence'] = value;
+        c.get('defence').map(function(elem){elem.style.backgroundColor = '#c4de54';});
+        elem.style.backgroundColor = '#7c921c';
+    });
+    c.click('fight', function (elem, value) {
+        Gm.fight('Hero','Enemy');
+        c.get('attack').map(function(elem){elem.style.backgroundColor = '#c4de54';});
+        c.get('defence').map(function(elem){elem.style.backgroundColor = '#c4de54';});
+    });
+
+
+
+
+
+
+
+    //this.addFightlog('&nbsp;');
+    // {attack: {head:false, body:false, lags:false}, defence: {head:false, body:false, lags:false}};
+    //console.log(u1.fightAppoint, u2.fightAppoint);
+    //this.ability = {};
+    //this.appoint = {};
+
+</script>
+</body>
+</html>

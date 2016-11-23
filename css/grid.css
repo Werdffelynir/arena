@@ -1,0 +1,72 @@
+*{margin: 0; padding: 0;-webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box;}
+/**{font-family: "Ubuntu Condensed", "Ubuntu", "sans", "sans-serif";font-size: 95%  }*/
+*:focus{outline: none}
+.grid1:first-child,
+.grid2:first-child,
+.grid3:first-child,
+.grid4:first-child,
+.grid5:first-child,
+.grid6:first-child,
+.grid7:first-child,
+.grid8:first-child,
+.grid9:first-child,
+.grid10:first-child,
+.grid11:first-child{margin-left:0;}
+.grid1{width:8.3134403935185%;}
+.grid2{width:16.648582175926%;}
+.grid3{width:24.983723958333%;}
+.grid4{width:33.318865740741%;}
+.grid5{width:41.654007523148%;}
+.grid6{width:49.989149305556%;}
+.grid7{width:58.324291087963%;}
+.grid8{width:66.65943287037%;}
+.grid9{width:74.994574652778%;}
+.grid10{width:83.329716435185%;}
+.grid11{width:91.664858217593%;}
+.grid1,
+.grid2,
+.grid3,
+.grid4,
+.grid5,
+.grid6,
+.grid7,
+.grid8,
+.grid9,
+.grid10,
+.grid11{display:inline; float:left; margin: 0 0 0 0.20833333333333%; list-style:none;}
+.first{margin-left:0; clear:left;}
+.full,.grid,.grid12{display:block; width:100%; clear:both;}
+.full>div:nth-child(1),.grid>div:nth-child(1),.grid12>div:nth-child(1){margin-left:0; clear:left;}
+.clear:before, .clear:after{content: " "; display: table;}
+.clear:after {clear: both;}
+.clear {*zoom: 1;}
+.clear_line{clear: both; width: 100%; height: 1px; margin-top: -1px}
+.hidden{visibility: hidden}
+.none,.hide{display: none}
+.block{display: block}
+.inline{display: inline}
+.inline_block{display: inline-block}
+.width_1{width:1%}.width_2{width:2%}.width_3{width:3%}.width_4{width:4%}.width_5{width:5%}.width_6{width:6%}.width_7{width:7%}.width_8{width:8%}.width_9{width:9%}.width_10{width:10%}.width_11{width:11%}.width_12{width:12%}.width_13{width:13%}.width_14{width:14%}.width_15{width:15%}.width_16{width:16%}.width_17{width:17%}.width_18{width:18%}.width_19{width:19%}.width_20{width:20%}.width_21{width:21%}.width_22{width:22%}.width_23{width:23%}.width_24{width:24%}.width_25{width:25%}.width_26{width:26%}.width_27{width:27%}.width_28{width:28%}.width_29{width:29%}.width_30{width:30%}.width_31{width:31%}.width_32{width:32%}.width_33{width:33%}.width_34{width:34%}.width_35{width:35%}.width_36{width:36%}.width_37{width:37%}.width_38{width:38%}.width_39{width:39%}.width_40{width:40%}.width_41{width:41%}.width_42{width:42%}.width_43{width:43%}.width_44{width:44%}.width_45{width:45%}.width_46{width:46%}.width_47{width:47%}.width_48{width:48%}.width_49{width:49%}.width_50{width:50%}.width_51{width:51%}.width_52{width:52%}.width_53{width:53%}.width_54{width:54%}.width_55{width:55%}.width_56{width:56%}.width_57{width:57%}.width_58{width:58%}.width_59{width:59%}.width_60{width:60%}.width_61{width:61%}.width_62{width:62%}.width_63{width:63%}.width_64{width:64%}.width_65{width:65%}.width_66{width:66%}.width_67{width:67%}.width_68{width:68%}.width_69{width:69%}.width_70{width:70%}.width_71{width:71%}.width_72{width:72%}.width_73{width:73%}.width_74{width:74%}.width_75{width:75%}.width_76{width:76%}.width_77{width:77%}.width_78{width:78%}.width_79{width:79%}.width_80{width:80%}.width_81{width:81%}.width_82{width:82%}.width_83{width:83%}.width_84{width:84%}.width_85{width:85%}.width_86{width:86%}.width_87{width:87%}.width_88{width:88%}.width_89{width:89%}.width_90{width:90%}.width_91{width:91%}.width_92{width:92%}.width_93{width:93%}.width_94{width:94%}.width_95{width:95%}.width_96{width:96%}.width_97{width:97%}.width_98{width:98%}.width_99{width:99%}.width_100{width:100%}
+.txt_left,.text_left{text-align:left}
+.txt_right,.text_right{text-align:right}
+.txt_center,.text_center{text-align:center}
+.font_bold{font-weight: bold}
+.font_italic{font-style: italic}
+.font_normal{font-style: normal; font-weight: normal}
+.mrg_top{margin-top:0}
+.mrg_bottom{margin-bottom: 0}
+.mrg_left{margin-left: 0}
+.mrg_right{margin-right: 0}
+.mrg_center{margin: 0 auto}
+.flt_left{float: left}
+.flt_right{float: right}
+.tbl{display:table; width:100%}
+.tbl_cell{display:table-cell;vertical-align:middle}
+.tbl_row{display:table-row}
+.tbl_column{display:table-column}
+.tbl_capt{display:table-caption}
+.valign_baseline{vertical-align:baseline}
+.valign_bottom{vertical-align:bottom}
+.valign_middle{vertical-align:middle}
+.valign_top{vertical-align:top}
+.select_off{-webkit-user-select: none; -moz-user-select: none; user-select: none}
