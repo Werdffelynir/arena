@@ -4,13 +4,10 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/move.css">
 
-<!--    <script src="/js/lib/ns.application.js"></script>
-    <script src="/js/app/init.js"></script>-->
-
-    <script src="/js/lib/animate.js"></script>
-    <script src="/js/lib/clicker.js"></script>
-    <script src="/js/lib/timer.js"></script>
+    <script src="/js/lib/ns.application.js"></script>
+    <script src="/js/app/move.js"></script>
 
     <style>
         html,body{
@@ -35,11 +32,11 @@
     <div>
         <div class="flex">
             <div class="life-box">
-                <div class="life-line hero"><div class="life-point">100</div>&nbsp;</div>
+                <div class="life-line hero"><div class="life-point">0</div>&nbsp;</div>
             </div>
             <span>&nbsp;</span>
             <div class="life-box">
-                <div class="life-line enemy"><div class="life-point">100</div>&nbsp;</div>
+                <div class="life-line enemy"><div class="life-point">0</div>&nbsp;</div>
             </div>
         </div>
         <div id="canvases">
@@ -48,21 +45,7 @@
         <div id="fight-log"></div>
     </div>
     <div>
-        <div class="flex">
-            <ul class="act-btns">
-                <li>Attack</li>
-                <li class="act-btn clicker" data-key="attack" data-value="head">head</li>
-                <li class="act-btn clicker" data-key="attack" data-value="body">body</li>
-                <li class="act-btn clicker" data-key="attack" data-value="lags">lags</li>
-            </ul>
-            <ul class="act-btns">
-                <li>Defence</li>
-                <li class="act-btn clicker" data-key="defence" data-value="head">head</li>
-                <li class="act-btn clicker" data-key="defence" data-value="body">body</li>
-                <li class="act-btn clicker" data-key="defence" data-value="lags">lags</li>
-            </ul>
-        </div>
-        <div class="act-btn-fight clicker" data-key="fight">Fight</div>
+        <div class="flex"></div>
     </div>
 </div>
 
@@ -75,16 +58,25 @@
 
 
 <script>
+    /*
+    var App = NamespaceApplication({
+        url: '/',
+        name: 'Game',
+        debug: true,
+        constructsType: false
+    });
 
-    var clicker = Clicker();
+    App.namespace();
 
-    var Game = function (name, elements) {
-        if (!(this instanceof Game)) return new Game(name);
-        this.name = name;
+
+
+    var Game = function (elements) {
+        if (!(this instanceof Game)) return new Game(elements);
         this.elements = elements;
         this.units = {};
+
+        this.clicker = Clicker();
     };
-    Game.prototype.name = 'game';
     Game.prototype.addUnit = function (name, unit) {
         this.units[name] = unit;
     };
@@ -130,7 +122,7 @@
 
 
 
-/*
+
     var timeData = {name: 'timeData', i: 0};
 
     var timerId = Timer.interval(function () {

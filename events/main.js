@@ -9,22 +9,19 @@ NamespaceApplication.domLoaded(function(){
 
     Scenes.main = function () {
         console.log('main', this.display);
-        this.display.innerHTML = '<p>Main Scenes</p>';
+        this.display.innerHTML = '<h1>Main Scenes</h1>';
     };
 
     Scenes.menu = function () {
         console.log('menu', this.display);
-        this.display.innerHTML = '<p>Menu Scenes</p>';
+        this.display.innerHTML = '<h1>Menu Scenes</h1>';
     };
 
     Scenes.world = function () {
         console.log('world', this.display);
-        this.display.innerHTML = '<p>World Scenes</p>';
+        this.display.innerHTML = '<h1>World Scenes</h1>';
     };
 
-
-
-/*
     clicker.click('navigation', function (k, v) {
         if (v == 'main') observer.dispatch('main');
         if (v == 'menu') observer.dispatch('menu');
@@ -35,13 +32,7 @@ NamespaceApplication.domLoaded(function(){
     observer.add('menu' , Scenes.menu, Scenes);
     observer.add('world' , Scenes.world, Scenes);
 
-    observer.dispatch('main');*/
-
-
-
-
-
-
+    observer.dispatch('main');
 
 });
 

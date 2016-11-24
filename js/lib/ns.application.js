@@ -1,11 +1,18 @@
 (function () {
 
+
     /**
-     *
+     * var App = NamespaceApplication({
+     *     url: '/',
+     *     name: 'My Application',
+     *     debug: true,
+     *     constructsType: false
+     * });
      */
 
     /**
-     *
+     * Current script version
+     * @updated
      * @type {string}
      */
     var version = '0.1.2';

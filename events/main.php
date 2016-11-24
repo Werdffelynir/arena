@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-<!--    <script src="/js/lib/animate.js"></script>
-    -->
+
+    <script src="/js/lib/animate.js"></script>
     <script src="/js/lib/clicker.js"></script>
     <script src="/js/lib/ns.application.js"></script>
     <script src="/js/lib/util.js"></script>
