@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/grid.css">
+    <script src="template.js"></script>
+    <style>
+        body, html {}
+        #page{}
+        #header{}
+        #content-wrap{
+            width: 80%;
+            margin: 0 auto;
+        }
+        #content{}
+        #sidebar{
+            width: 20%;
+        }
+        #footer{}
+        .flex{
+            display: flex;
+        }
+
+    </style>
+</head>
+<body>
+
+<div id="page">
+    <div id="header"></div>
+    <div id="content-wrap" class="flex">
+        <div id="sidebar"></div>
+        <div id="content"></div>
+    </div>
+    <div id="footer"></div>
+</div>
+
+
+
+<script>
+
+    var node = {};
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        node['header'] = document.querySelector('#header');
+        node['sidebar'] = document.querySelector('#sidebar');
+        node['content'] = document.querySelector('#content');
+        node['footer'] = document.querySelector('#footer');
+
+        var template = new Template();
+
+        var loadList = [
+            '/events/templates/header.html',
+            '/events/templates/navigation.html',
+            '/events/templates/sidebar.html',
+            '/events/templates/content.html',
+            '/events/templates/footer.html'
+        ];
+
+        function templatesLoaded(list) {
+
+            console.log('list', list);
+
+            template.inject(node['header'], template.get('header'));
+            template.inject(node['sidebar'],
+                template.assign(
+                    template.get('sidebar'),
+                    {navigation: template.get('navigation')}
+                ));
+            template.inject(node['footer'], template.get('footer'));
+            template.inject(node['content'], template.get('content'));
+        }
+
+        template.load(loadList, templatesLoaded);
+
+        console.log('template', template);
+
+    });
+</script>
+</body>
+</html>

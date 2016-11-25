@@ -109,9 +109,10 @@
      *  });
      * @param {*} config        {method: 'POST', data: {}, headers: {}, action: '/index'}
      * @param callback          executing event - onloadend. function (status, responseText)
+     * @param thisInstance      object 'this' for callback
      * @returns {XMLHttpRequest}
      */
-    app.ajax = function (config, callback) {
+    app.ajax = function (config, callback, thisInstance) {
         var conf = {
             method:     config.method || 'GET',
             data:       config.data || {},
@@ -135,12 +136,15 @@
             xhr.setRequestHeader(kd, conf.headers[kd]);
         }
         xhr.onloadend = function () {
+            if (typeof thisInstance !== 'object') thisInstance = {};
+            thisInstance.XMLHttpRequest = xhr;
             if (typeof callback === 'function')
-                callback.call(xhr, xhr.status, xhr.responseText);
+                callback.call(thisInstance, xhr.status, xhr.responseText);
         };
         xhr.send(fd);
         return xhr;
     };
+
 
     /**
      * Send Form Data on AJAX request. Example:
@@ -406,16 +410,16 @@
     /**
      * Simple template builder
      *
-     * @param stringData    source string data with marks "{{key1}}"
+     * @param viewString    source string data with marks "{{key1}}"
      * @param params        object {key1 : 'value'}
      * @returns {*}
      */
-    app.assign = function (stringData, params) {
+    app.assign = function (viewString, params) {
         if (typeof params === 'object')
             for (var k in params)
-                stringData = stringData.replace(new RegExp('{{' + k + '}}', 'gi'), params[k]);
+                viewString = viewString.replace(new RegExp('{{' + k + '}}', 'gi'), params[k]);
 
-        return stringData;
+        return viewString;
     };
 
 
